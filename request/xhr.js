@@ -35,6 +35,18 @@ define([
 	// up to version 30, so it's intentionally not included here
 	var nativeResponseTypes = {'blob': 1, 'document': 1, 'arraybuffer': 1};
 
+	function getRequestError (response, _xhr) {
+		var message;
+		if (_xhr.statusText) {
+			message = _xhr.statusText;
+		}
+		else {
+			message = 'Unable to load ' + response.url + ' status: ' + _xhr.status;
+		}
+		var error = new RequestError(message, response);
+		error.statusCode = _xhr.status;
+		return error;
+	}
 	function handleResponse(response, error){
 		var _xhr = response.xhr;
 		response.status = response.xhr.status;
@@ -62,7 +74,7 @@ define([
 		}else if(util.checkStatus(_xhr.status)){
 			this.resolve(response);
 		}else{
-			error = new RequestError('Unable to load ' + response.url + ' status: ' + _xhr.status, response);
+			error = getRequestError(response, _xhr);
 
 			this.reject(error);
 		}
@@ -90,7 +102,7 @@ define([
 			}
 			function onError(evt){
 				var _xhr = evt.target;
-				var error = new RequestError('Unable to load ' + response.url + ' status: ' + _xhr.status, response);
+				var error = getRequestError(response, _xhr);
 				dfd.handleResponse(response, error);
 			}
 
