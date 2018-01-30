@@ -1,11 +1,28 @@
-define([
-	'./util',
-	'../errors/RequestTimeoutError',
-	'../errors/CancelError',
-	'../_base/array',
-	'../has!host-browser?../_base/window:',
-	'../has!host-browser?dom-addeventlistener?:../on:'
-], function(util, RequestTimeoutError, CancelError, array, win, on){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            './util',
+            '../errors/RequestTimeoutError',
+            '../errors/CancelError',
+            '../_base/array',
+            '../has!host-browser?../_base/window:',
+            '../has!host-browser?dom-addeventlistener?:../on:'
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            require('./util'),
+			require('../errors/RequestTimeoutError'),
+			require('../errors/CancelError'),
+			require('../_base/array'),
+			require('../_base/window'),
+			require('../on')
+        );
+    }
+})(function(util, RequestTimeoutError, CancelError, array, win, on){
 	// avoid setting a timer per request. It degrades performance on IE
 	// something fierece if we don't use unified loops.
 	var _inFlightIntvl = null,
@@ -97,7 +114,7 @@ define([
 		}catch(e){}
 	};
 
-	if(win && on && win.doc.attachEvent){
+	if(win && win.doc && on && win.doc.attachEvent){
 		// Automatically call cancel all io calls on unload in IE
 		// http://bugs.dojotoolkit.org/ticket/2357
 		on(win.global, 'unload', function(){

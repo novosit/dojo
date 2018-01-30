@@ -1,10 +1,26 @@
-define([
-	'../json',
-	'../_base/kernel',
-	'../_base/array',
-	'../has',
-	'../has!dom?../selector/_loader' // only included for has() qsa tests
-], function(JSON, kernel, array, has){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            '../json',
+            '../_base/kernel',
+            '../_base/array',
+            '../has',
+            '../has!dom?../selector/_loader' // only included for has() qsa tests
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            require('../json'),
+			require('../_base/kernel'),
+			require('../_base/array'),
+			require('../has'),
+			undefined
+        );
+    }
+})(function(JSON, kernel, array, has){
 	has.add('activex', typeof ActiveXObject !== 'undefined');
 	has.add('dom-parser', function(global){
 		return 'DOMParser' in global;

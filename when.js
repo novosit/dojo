@@ -1,7 +1,20 @@
-define([
-	"./Deferred",
-	"./promise/Promise"
-], function(Deferred, Promise){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            "./Deferred",
+            "./promise/Promise"
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            require("./Deferred"),
+			require("./promise/Promise")
+        );
+    }
+})(function(Deferred, Promise){
 	"use strict";
 
 	// module:

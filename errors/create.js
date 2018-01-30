@@ -1,4 +1,18 @@
-define(["../_base/lang"], function(lang){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            "../_base/lang"
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            require("../_base/lang")
+        );
+    }
+})(function(lang){
 	return function(name, ctor, base, props){
 		base = base || Error;
 

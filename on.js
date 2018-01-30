@@ -1,4 +1,22 @@
-define(["./has!dom-addeventlistener?:./aspect", "./_base/kernel", "./sniff"], function(aspect, dojo, has){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            "./aspect",
+			"./_base/kernel",
+			"./sniff"
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            undefined,
+			require("./_base/kernel"),
+			require("./sniff")
+        );
+    }
+})(function(aspect, dojo, has){
 
 	"use strict";
 	if(has("dom")){ // check to make sure we are in a browser, this module should work anywhere

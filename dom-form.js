@@ -1,4 +1,14 @@
-define(["./_base/lang", "./dom", "./io-query", "./json"], function(lang, dom, ioq, json){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define(["./_base/lang", "./dom", "./io-query", "./json"], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(require("./_base/lang"), require("./dom"), require("./io-query"), require("./json"));
+    }
+})(function(lang, dom, ioq, json){
 	// module:
 	//		dojo/dom-form
 

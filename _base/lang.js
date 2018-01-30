@@ -1,4 +1,14 @@
-define(["./kernel", "../has", "../sniff"], function(dojo, has){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define(["./kernel", "../has", "../sniff"], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(require("./kernel"), require("../has"), require("../sniff"));
+    }
+})(function(dojo, has){
 	// module:
 	//		dojo/_base/lang
 

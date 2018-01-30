@@ -1,12 +1,30 @@
-define([
-	"./kernel",
-	"../Deferred",
-	"../promise/Promise",
-	"../errors/CancelError",
-	"../has",
-	"./lang",
-	"../when"
-], function(dojo, NewDeferred, Promise, CancelError, has, lang, when){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+        	"./kernel",
+            "../Deferred",
+            "../promise/Promise",
+            "../errors/CancelError",
+            "../has",
+            "./lang",
+            "../when"
+		], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+        	require("./kernel"),
+            require("../Deferred"),
+            require("../promise/Promise"),
+            require("../errors/CancelError"),
+            require("../has"),
+            require("./lang"),
+            require("../when")
+		);
+    }
+})(function(dojo, NewDeferred, Promise, CancelError, has, lang, when){
 	// module:
 	//		dojo/_base/Deferred
 

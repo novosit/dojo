@@ -1,4 +1,14 @@
-define(["./has"], function(has){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define(["./has"], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(require("./has"));
+    }
+})(function(has){
 	"use strict";
 	var hasJSON = typeof JSON != "undefined";
 	has.add("json-parse", hasJSON); // all the parsers work fine

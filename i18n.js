@@ -1,5 +1,15 @@
-define(["./_base/kernel", "require", "./has", "./_base/array", "./_base/config", "./_base/lang", "./has!host-browser?./_base/xhr", "./json", "module"],
-	function(dojo, require, has, array, config, lang, xhr, json, module){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define(["./_base/kernel", "require", "./has", "./_base/array", "./_base/config", "./_base/lang", "./has!host-browser?./_base/xhr", "./json", "module"], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(require("./_base/kernel"), require, require("./has"), require("./_base/array"), require("./_base/config"), require("./_base/lang"),
+             require("./_base/xhr"), require("./json"), module);
+    }
+})(function(dojo, require, has, array, config, lang, xhr, json, module){
 
 	// module:
 	//		dojo/i18n

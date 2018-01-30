@@ -1,5 +1,14 @@
-define(["./sniff", "./_base/window"],
-		function(has, win){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define(["./sniff", "./_base/window"], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(require("./sniff"), require("./_base/window"));
+    }
+})(function(has, win){
 	// module:
 	//		dojo/dom
 

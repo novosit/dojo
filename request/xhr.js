@@ -1,12 +1,30 @@
-define([
-	'../errors/RequestError',
-	'./watch',
-	'./handlers',
-	'./util',
-	'../has'/*=====,
-	'../request',
-	'../_base/declare' =====*/
-], function(RequestError, watch, handlers, util, has/*=====, request, declare =====*/){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            '../errors/RequestError',
+            './watch',
+            './handlers',
+            './util',
+            '../has'/*=====,
+			'../request',
+			'../_base/declare' =====*/
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            require('../errors/RequestError'),
+			require('./watch'),
+			require('./handlers'),
+			require('./util'),
+			require('../has')/*=====,
+			require('../request'),
+			require('../_base/declare)' =====*/
+        );
+    }
+})(function(RequestError, watch, handlers, util, has/*=====, request, declare =====*/){
 	has.add('native-xhr', function(){
 		// if true, the environment has a native XHR implementation
 		return typeof XMLHttpRequest !== 'undefined';

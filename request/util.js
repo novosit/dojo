@@ -1,13 +1,32 @@
-define([
-	'exports',
-	'../errors/RequestError',
-	'../errors/CancelError',
-	'../Deferred',
-	'../io-query',
-	'../_base/array',
-	'../_base/lang',
-	'../promise/Promise'
-], function(exports, RequestError, CancelError, Deferred, ioQuery, array, lang, Promise){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            'exports',
+            '../errors/RequestError',
+            '../errors/CancelError',
+            '../Deferred',
+            '../io-query',
+            '../_base/array',
+            '../_base/lang',
+            '../promise/Promise'
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            exports,
+            require('../errors/RequestError'),
+            require('../errors/CancelError'),
+            require('../Deferred'),
+            require('../io-query'),
+            require('../_base/array'),
+            require('../_base/lang'),
+            require('../promise/Promise')
+        );
+    }
+})(function(exports, RequestError, CancelError, Deferred, ioQuery, array, lang, Promise){
 	exports.deepCopy = function deepCopy(target, source){
 		for(var name in source){
 			var tval = target[name],
@@ -155,4 +174,5 @@ define([
 			stat === 1223 ||                // or, Internet Explorer mangled the status code
 			!stat;                         // or, we're Titanium/browser chrome/chrome extension requesting a local file
 	};
+	return exports;
 });

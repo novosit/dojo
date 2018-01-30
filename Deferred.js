@@ -1,10 +1,26 @@
-define([
-	"./has",
-	"./_base/lang",
-	"./errors/CancelError",
-	"./promise/Promise",
-	"./has!config-deferredInstrumentation?./promise/instrumentation"
-], function(has, lang, CancelError, Promise, instrumentation){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            "./has",
+            "./_base/lang",
+            "./errors/CancelError",
+            "./promise/Promise",
+            "./has!config-deferredInstrumentation?./promise/instrumentation"
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            require("./has"),
+            require("./_base/lang"),
+            require("./errors/CancelError"),
+            require("./promise/Promise"),
+            undefined
+        );
+    }
+})(function(has, lang, CancelError, Promise, instrumentation){
 	"use strict";
 
 	// module:

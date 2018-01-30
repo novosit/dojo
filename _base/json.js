@@ -1,4 +1,20 @@
-define(["./kernel", "../json"], function(dojo, json){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            "./kernel",
+			"../json"
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            require("./kernel"),
+			require("../json")
+        );
+    }
+})(function(dojo, json){
 
 // module:
 //		dojo/_base/json

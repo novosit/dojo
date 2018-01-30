@@ -1,4 +1,14 @@
-define(["../has", "./config", "require", "module"], function(has, config, require, module){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define(["../has", "./config", "require", "module"], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(require("../has"), require("./config"), require, module);
+    }
+})(function(has, config, require, module){
 	// module:
 	//		dojo/_base/kernel
 

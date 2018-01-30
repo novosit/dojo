@@ -1,22 +1,50 @@
-define([
-	"./kernel",
-	"./sniff",
-	"require",
-	"../io-query",
-	/*===== "./declare", =====*/
-	"../dom",
-	"../dom-form",
-	"./Deferred",
-	"./config",
-	"./json",
-	"./lang",
-	"./array",
-	"../on",
-	"../aspect",
-	"../request/watch",
-	"../request/xhr",
-	"../request/util"
-], function(dojo, has, require, ioq, /*===== declare, =====*/ dom, domForm, Deferred, config, json, lang, array, on, aspect, watch, _xhr, util){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+            "./kernel",
+            "./sniff",
+            "require",
+            "../io-query",
+            /*===== "./declare", =====*/
+            "../dom",
+            "../dom-form",
+            "./Deferred",
+            "./config",
+            "./json",
+            "./lang",
+            "./array",
+            "../on",
+            "../aspect",
+            "../request/watch",
+            "../request/xhr",
+            "../request/util"
+		], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+            require("./kernel"),
+            require("./sniff"),
+            require,
+        	require("../io-query"),
+            /*===== "./declare", =====*/
+            require("../dom"),
+            require("../dom-form"),
+            require("./Deferred"),
+            require("./config"),
+            require("./json"),
+            require("./lang"),
+            require("./array"),
+            require("../on"),
+            require("../aspect"),
+            require("../request/watch"),
+            require("../request/xhr"),
+            require("../request/util")
+		);
+    }
+})(function(dojo, has, require, ioq, /*===== declare, =====*/ dom, domForm, Deferred, config, json, lang, array, on, aspect, watch, _xhr, util){
 	// module:
 	//		dojo/_base/xhr
 
