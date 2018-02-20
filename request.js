@@ -1,8 +1,17 @@
-define([
-	'./request/default!'/*=====,
-	'./_base/declare',
-	'./promise/Promise' =====*/
-], function(request/*=====, declare, Promise =====*/){
+(function (factory) {
+    'use strict';
+    var isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+        	'./request/xhr'
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+        	require('./request/xhr')
+        );
+    }
+})(function(request/*=====, declare, Promise =====*/){
 	/*=====
 	request = function(url, options){
 		// summary:

@@ -1,4 +1,4 @@
-define(["./_base/kernel", "./has", "./dom", "./on", "./_base/array", "./_base/lang", "./selector/_loader", "./selector/_loader"],
+define(["./_base/kernel", "./has", "./dom", "./on", "./_base/array", "./_base/lang", "./selector/_loader", "./selector/acme"],
 	function(dojo, has, dom, on, array, lang, loader, defaultEngine){
 
 	"use strict";

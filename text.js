@@ -1,4 +1,22 @@
-define(["./_base/kernel", "require", "./has", "./has!host-browser?./request"], function(dojo, require, has, request){
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([
+        	"./_base/kernel",
+        	"./has", 
+        	"./request"
+        ], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory(
+        	require("./_base/kernel"),
+        	require("./has"), 
+       		require("./request")
+        );
+    }
+})(function(dojo, has, request){
 	// module:
 	//		dojo/text
 
@@ -13,7 +31,12 @@ define(["./_base/kernel", "require", "./has", "./has!host-browser?./request"], f
 		if(require.getText){
 			getText= require.getText;
 		}else{
-			console.error("dojo/text plugin failed to load because loader does not support getText");
+			getText = function (url, _, load) {
+				var requireText = require('require-text');
+        		var text = requireText(filePath, require);
+				load(text);
+			};
+//			console.error("dojo/text plugin failed to load because loader does not support getText");
 		}
 	}
 
@@ -142,7 +165,17 @@ define(["./_base/kernel", "require", "./has", "./has!host-browser?./request"], f
 		}
 	};
 
+	function pitch(filePath) {
+		return new Promise(function (resolve, reject) {
+			var requireText = require('require-text');
+        	var text = requireText(filePath, require);
+        	var result = 'module.exports = ' + JSON.stringify(text) + ';';
+        	resolve(result);
+		});
+	}
+
 	return {
+		pitch: pitch,
 		// summary:
 		//		This module implements the dojo/text! plugin and the dojo.cache API.
 		// description:

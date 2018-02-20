@@ -1,4 +1,4 @@
-define(["./_base/kernel", "./has", "require", "./has!host-browser?./domReady", "./_base/lang"], function(dojo, has, require, domReady, lang){
+define(["./_base/kernel", "./has", "require", "./domReady", "./_base/lang"], function(dojo, has, require, domReady, lang){
 	// module:
 	//		dojo/ready
 	// note:

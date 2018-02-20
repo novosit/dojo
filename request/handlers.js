@@ -8,7 +8,7 @@
             '../_base/kernel',
             '../_base/array',
             '../has',
-            '../has!dom?../selector/_loader' // only included for has() qsa tests
+            '../selector/_loader' // only included for has() qsa tests
         ], factory);
     }
     else if (typeof(exports) === 'object') {

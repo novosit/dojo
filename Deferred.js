@@ -8,7 +8,7 @@
             "./_base/lang",
             "./errors/CancelError",
             "./promise/Promise",
-            "./has!config-deferredInstrumentation?./promise/instrumentation"
+            "./promise/instrumentation"
         ], factory);
     }
     else if (typeof(exports) === 'object') {

@@ -28,7 +28,7 @@ var ret = {
 	 },
 	 =====*/
 
-	doc: this["document"] || null,
+	doc: ((typeof(window) !== 'undefined')?window:this)["document"] || null,
 	/*=====
 	doc: {
 		// summary:

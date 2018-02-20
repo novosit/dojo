@@ -8,8 +8,8 @@
             '../errors/RequestTimeoutError',
             '../errors/CancelError',
             '../_base/array',
-            '../has!host-browser?../_base/window:',
-            '../has!host-browser?dom-addeventlistener?:../on:'
+            '../_base/window',
+            '../on'
         ], factory);
     }
     else if (typeof(exports) === 'object') {

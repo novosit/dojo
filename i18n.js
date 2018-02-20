@@ -1,15 +1,14 @@
 (function (factory) {
     'use strict';
-    var req = require,
-        isAmd = typeof (define) === 'function' && define.amd;
+    var isAmd = typeof (define) === 'function' && define.amd;
     if (isAmd) {
-        define(["./_base/kernel", "require", "./has", "./_base/array", "./_base/config", "./_base/lang", "./has!host-browser?./_base/xhr", "./json", "module"], factory);
+        define(["./_base/kernel", "./has", "./_base/array", "./_base/config", "./_base/lang", "./_base/xhr", "./json", "module"], factory);
     }
     else if (typeof(exports) === 'object') {
-        module.exports = factory(require("./_base/kernel"), require, require("./has"), require("./_base/array"), require("./_base/config"), require("./_base/lang"),
+        module.exports = factory(require("./_base/kernel"), require("./has"), require("./_base/array"), require("./_base/config"), require("./_base/lang"),
              require("./_base/xhr"), require("./json"), module);
     }
-})(function(dojo, require, has, array, config, lang, xhr, json, module){
+})(function(dojo, has, array, config, lang, xhr, json, module){
 
 	// module:
 	//		dojo/i18n
@@ -636,11 +635,37 @@
 		}
 	}
 
+	function pitch(filePath) {
+		var path = require('path');
+		return new Promise(function (resolve, reject) {
+			try {
+        			var root = require(filePath);
+        			Object.keys(root).filter(function (k) { return k !== 'root'; }).forEach(function (k) {
+        				var subpath = path.resolve(path.dirname(filePath), k, path.basename(filePath)); 
+        				var sub = require(subpath);
+        				root[k] = sub;
+        			});
+        			var r = '(function (factory) {\n    \'use strict\';\n    var isAmd = typeof (define) === \'function\' && define.amd;\n    if (isAmd) {\n        define([\'ninejs/config\'], factory);' +
+						'    }\n    else if (typeof(exports) === \'object\') {\n        module.exports = factory(require(\'ninejs/config\'));\n    }\n})(function (config) {\n';
+            		r += '		var t = ' + JSON.stringify(root) + ';\n	var loc = config && config.ninejs && config.ninejs.locale || \'\';\n t = t[loc] || t[loc.length > 2 ? loc.substr(0,2):\'\'] || t.root;\n	return t;';
+            		r += '\n});';
+					console.log('I18n DE ' + filePath);
+					console.log(r);
+            		resolve(r);
+        	}
+        	catch (e) {
+        		console.log(e);
+        		reject(e);
+        	}
+		});
+	}
+
 	return lang.mixin(thisModule, {
 		dynamic:true,
 		normalize:normalize,
 		load:load,
 		cache:cache,
-		getL10nName: getL10nName
+		getL10nName: getL10nName,
+		pitch: pitch
 	});
 });

@@ -18,7 +18,8 @@ var exports = {
 	// summary:
 	//		This modules defines dojo/date/locale, localization methods for Date.
 };
-lang.setObject(module.id.replace(/\//g, "."), exports);
+var moduleId = 'dojo/date/locale';
+//lang.setObject(module.id.replace(/\//g, "."), exports);
 
 // Localization methods for Date.   Honor local customs using locale-dependent dojo.cldr data.
 
@@ -626,7 +627,7 @@ exports._getGregorianBundle = function(/*String*/ locale){
 	return gregorian; /*Object*/
 };
 
-exports.addCustomFormats(module.id.replace(/\/date\/locale$/, ".cldr"),"gregorian");
+exports.addCustomFormats(moduleId.replace(/\/date\/locale$/, ".cldr"),"gregorian");
 
 exports.getNames = function(/*String*/ item, /*String*/ type, /*String?*/ context, /*String?*/ locale){
 	// summary:

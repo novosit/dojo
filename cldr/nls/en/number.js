@@ -1,4 +1,15 @@
-define(
+(function (factory) {
+    'use strict';
+    var req = require,
+        isAmd = typeof (define) === 'function' && define.amd;
+    if (isAmd) {
+        define([], factory);
+    }
+    else if (typeof(exports) === 'object') {
+        module.exports = factory();
+    }
+})(function () {
+	return (
 //begin v1.x content
 {
 	"group": ",",
@@ -21,3 +32,4 @@ define(
 }
 //end v1.x content
 );
+});
