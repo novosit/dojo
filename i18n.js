@@ -649,8 +649,6 @@
 						'    }\n    else if (typeof(exports) === \'object\') {\n        module.exports = factory(require(\'ninejs/config\'));\n    }\n})(function (config) {\n';
             		r += '		var t = ' + JSON.stringify(root) + ';\n	var loc = config && config.ninejs && config.ninejs.locale || \'\';\n t = t[loc] || t[loc.length > 2 ? loc.substr(0,2):\'\'] || t.root;\n	return t;';
             		r += '\n});';
-					console.log('I18n DE ' + filePath);
-					console.log(r);
             		resolve(r);
         	}
         	catch (e) {
