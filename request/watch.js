@@ -117,7 +117,7 @@
 	if(win && win.doc && on && win.doc.attachEvent){
 		// Automatically call cancel all io calls on unload in IE
 		// http://bugs.dojotoolkit.org/ticket/2357
-		on(win.global, 'unload', function(){
+		on(win.doc.parentWindow, 'unload', function(){
 			watch.cancelAll();
 		});
 	}
