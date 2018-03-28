@@ -9,7 +9,7 @@ define([
 	"../string",
 	"../i18n!../cldr/nls/gregorian",
 	"module"
-], function(lang, array, date, /*===== declare, =====*/ supplemental, i18n, regexp, string, gregorian, module){
+], function(lang, array, date, /*===== declare, =====*/ supplemental, i18n, regexp, string, gregorianI18n, module){
 
 // module:
 //		dojo/date/locale
@@ -621,7 +621,7 @@ exports.addCustomFormats = function(/*String*/ packageName, /*String*/ bundleNam
 exports._getGregorianBundle = function(/*String*/ locale){
 	var gregorian = {};
 	array.forEach(_customFormats, function(desc){
-		var bundle = i18n.getLocalization(desc.pkg, desc.name, locale);
+		var bundle = gregorianI18n;// i18n.getLocalization(desc.pkg, desc.name, locale);
 		gregorian = lang.mixin(gregorian, bundle);
 	}, this);
 	return gregorian; /*Object*/

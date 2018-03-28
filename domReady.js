@@ -1,6 +1,6 @@
 define(['./has'], function(has){
-	var global = this,
-		doc = document,
+	var global = (typeof(window) !== 'undefined')?window:this,
+		doc = global.document,
 		readyStates = { 'loaded': 1, 'complete': 1 },
 		fixReadyState = typeof doc.readyState != "string",
 		ready = !!readyStates[doc.readyState],
